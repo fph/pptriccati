@@ -23,4 +23,4 @@ U(n1+1:n1+n2, n1+1:end) = eye(n2);
 U(n1+n2+1:n1+n2+n1, 1:n1) = eye(n1);
 U(n1+n2+n1+1:end, 1:n1) = -quad.X(1:n1, end-n2+1:end)';
 U(n1+n2+n1+1:end, n1+1:end) = quad.X(n1+1:end, end-n2+1:end)' * quad.X(n1+1:end, end-n2+1:end);
-U = U([quad.p n1+n2+quad.p], :);
+U([quad.p n1+n2+quad.p], :) = U;

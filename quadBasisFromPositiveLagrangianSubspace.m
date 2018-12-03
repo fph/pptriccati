@@ -8,7 +8,7 @@ threshold = 1e-15;
 quad.p = p;
 quad.dimensions = [n1 n2];
 
-U([quad.p n1+n2+quad.p], :) = U;
+U = U([quad.p n1+n2+quad.p], :);
 Y = [U(1:n1, :); -U(n1+n2+n1+1:end, :)] / U([n1+n2+1:n1+n2+n1, n1+1:n1+n2], :);
 
 if norm(Y-Y') / norm(Y) > sqrt(eps(1))
