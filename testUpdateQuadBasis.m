@@ -1,11 +1,9 @@
 rng('default');
 
-rng(2); % TODO: remove, to get a better initial case for development
+n = 9;
 
-n = 5;
-
-for i = 1:100
-    quad = randomQuadBasis(5);
+for trie = 1:100
+    quad = randomQuadBasis(n);
     if size(quad.X,1) == quad.dimensions(1)
         % this swap does not make sense; C is the empty matrix and the
         % possible pivot is null
@@ -15,5 +13,18 @@ for i = 1:100
     j = randi([1, quad.dimensions(2)]);
         
     quad2 = updateQuadBasisIn(quad, j);
+    assert(subspace(positiveLagrangianSubspaceFromQuadBasis(quad), positiveLagrangianSubspaceFromQuadBasis(quad2)) < sqrt(eps));
+end
+
+for trie = 1:100
+    quad = randomQuadBasis(n);
+    if size(quad.X,2) == quad.dimensions(2)
+        % this swap does not make sense; B is the empty matrix and the
+        % possible pivot is null
+        continue
+    end
+    i = randi([1, quad.dimensions(1)]);
+        
+    quad2 = updateQuadBasisOut(quad, i);
     assert(subspace(positiveLagrangianSubspaceFromQuadBasis(quad), positiveLagrangianSubspaceFromQuadBasis(quad2)) < sqrt(eps));
 end

@@ -11,14 +11,13 @@ n2 = quad.dimensions(2);
 
 assert(j <= n2);
 
-assert(size(quad.X,1) > n1, 'Your quadBasis has C=0, so the performed swap cannot be performed (null pivot)');
+assert(size(quad.X,1) > n1, 'Your quadBasis has an empty matrix C (i.e., the block C''*C is zero), so the performed swap cannot be performed (null pivot)');
 
 % brings the selected column into the first column of A, i.e., end-n2+1
 quad.X(:, [end-n2+j end-n2+1]) = quad.X(:, [end-n2+1 end-n2+j]);
 quad.p([end-n2+j end-n2+1]) = quad.p([end-n2+1 end-n2+j]);
 
 % creates zeros in the first column of C via an orthogonal transformation
-% (if needed)
 [v, beta, s] = gallery('house', quad.X(n1+1:end, end-n2+1));
 quad.X(n1+1:end, end-n2+2:end) = quad.X(n1+1:end, end-n2+2:end) - beta*v*(v'*quad.X(n1+1:end, end-n2+2:end));
 quad.X(n1+1, end-n2+1) = s;
