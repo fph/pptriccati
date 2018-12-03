@@ -22,5 +22,5 @@ C = symmetricFactorization(-Y(n1+1:end, n1+1:end))';
 rB = size(B, 2);
 rC = size(C, 1);
 
-quad.X = [Y(1:n1, n1+1:end) B; C zeros(rC, rB)];
+quad.X = [B Y(1:n1, n1+1:end);zeros(rC, rB) C];
 
