@@ -6,9 +6,9 @@ n2 = quad.dimensions(2);
 
 U = zeros(2*(n1+n2), n1+n2);
 
-%P*[BB'  A ]
+%P'*[BB'  A ]
 %  [ 0   I ]
-%P*[ I   0 ]
+%P'*[ I   0 ]
 %  [-A' C'C]
 
 % to
