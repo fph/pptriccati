@@ -1,7 +1,9 @@
-function quad = quadBasisFromPositiveLagrangianSubspace(U, p, n1);
+function quad = quadBasisFromPositiveLagrangianSubspace(U, p, dimensions);
 [m n] = size(U);
 assert(m==2*n);
-n2 = n - n1;
+n1 = dimensions(1);
+n2 = dimensions(2);
+assert(n1+n2 == n);
 
 threshold = 1e-15;
 
