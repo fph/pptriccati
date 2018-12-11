@@ -11,5 +11,6 @@ for trie = 1:100
     quad2alt = quadFromQuad(quad, quad2.p, quad2.dimensions);
     
     assert(subspace(positiveLagrangianSubspaceFromQuadBasis(quad2), positiveLagrangianSubspaceFromQuadBasis(quad2alt)) < sqrt(eps));
+    assert(all(quad2.p == quad2alt.p));
     
 end

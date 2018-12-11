@@ -54,7 +54,23 @@ while sum(toInsertIndexInM) + sum(toRemoveIndexInM) > 0
     % indices to insert/remove from the PPT inside the matrix M
     toInsertIndexInM = ismember(quad.p, toInsert);
     toRemoveIndexInM = ismember(quad.p, toRemove);
-    
+
 end
+
+% now the two "In" and "Out" set are equals; we just have to reorder
+% their entries.
+
+n1 = newdimensions(1);
+n2 = newdimensions(2);
+
+p = 1:n1+n2;
+p(quad.p) = p;
+p = p(newp);
+% p now is the permutation that sends quad.p into newp
+
+quad.X(1:n1,:) = quad.X(p(1:n1),:);
+quad.X(:,end-n2+1:end) = quad.X(:, end-n2+p(n1+1:end)-n1);
+
+quad.p = newp;
 
 1;
