@@ -33,7 +33,9 @@ stayingOut = ~currentlyIn & ~toInsert;
 
 p = [find(stayingIn); find(toRemove); find(toInsert); find(stayingOut)];
 
-quad.X = quad.X(p, p);
+quad.X(1:n1,:) = quad.X(p(1:n1),:);
+quad.X(:,end-n2+1:end) = quad.X(:, end-n2+p(n1+1:end)-n1);
+
 quad.p = quad.p(p);
 
 % now all indices to remove are in the last part of 1:n1, and all those to
