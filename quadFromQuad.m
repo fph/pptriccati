@@ -3,12 +3,6 @@ function quad = quadFromQuad(quad, newp, newdimensions)
 
 % build arrays that tell which indices in the initial and final matrix are PPTed in
 
-
-% TODO: see if one can optimize these indexing operations
-
-n1 = quad.dimensions(1);
-n2 = quad.dimensions(2);
-
 newIn = false(size(newp));
 newIn(newp(1:newdimensions(1))) = true;
 
