@@ -6,8 +6,9 @@ function quad = randomQuadBasis(n, varargin)
 
 o = Options(varargin{:});
 
-n1 = randi([0,n]);
+n1 = o.get('n1', randi([0,n]));
 n2 = n - n1;
+
 if o.get('fullrank', false)
     rB = n1;
     rC = n2;

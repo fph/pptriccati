@@ -16,22 +16,22 @@ function quad = quadSpecifyIndices(quad, inIndices, outIndices)
 n1 = quad.dimensions(1);
 n2 = quad.dimensions(2);
 
-inIndicesMask = false(n1+n2, 1);
+inIndicesMask = false(1, n1+n2);
 inIndicesMask(inIndices) = true;
 inIndicesMask = inIndicesMask(quad.p); % converts the mask to "quad.X ordering"
 
-outIndicesMask = false(n1+n2, 1);
+outIndicesMask = false(1, n1+n2);
 outIndicesMask(outIndices) = true;
 outIndicesMask = outIndicesMask(quad.p);
 
-currentlyIn = false(n1+n2, 1); currentlyIn(1:n1) = true;
+currentlyIn = false(1, n1+n2); currentlyIn(1:n1) = true;
 
 toInsert = inIndicesMask & ~currentlyIn;
 toRemove = outIndicesMask & currentlyIn;
 stayingIn = currentlyIn & ~toRemove;
 stayingOut = ~currentlyIn & ~toInsert;
 
-p = [find(stayingIn); find(toRemove); find(toInsert); find(stayingOut)];
+p = [find(stayingIn) find(toRemove) find(toInsert) find(stayingOut)];
 
 quad.X(1:n1,:) = quad.X(p(1:n1),:);
 quad.X(:,end-n2+1:end) = quad.X(:, end-n2+p(n1+1:end)-n1);
