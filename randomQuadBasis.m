@@ -7,6 +7,9 @@ function quad = randomQuadBasis(n, varargin)
 o = Options(varargin{:});
 
 n1 = o.get('n1', randi([0,n]));
+if n1 > n
+    error 'Invalid n1';
+end
 n2 = n - n1;
 
 if o.get('fullrank', false)
