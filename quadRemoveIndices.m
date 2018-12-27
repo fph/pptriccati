@@ -15,6 +15,10 @@ n2 = quad.dimensions(2);
 subIndicesMask = false(1, n1+n2); subIndicesMask(subIndices) = true;
 schurIndicesMask = false(1, n1+n2); schurIndicesMask(schurIndices) = true;
 
+if not(all((subIndicesMask & schurIndicesMask) == 0))
+    error 'subIndices and schurIndices should be disjoint';
+end
+
 % adjusts the PPT so that the indices to remove have the right kind
 quad = quadSpecifyIndices(quad, schurIndicesMask, subIndicesMask);
 
