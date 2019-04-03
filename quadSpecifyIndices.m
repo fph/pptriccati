@@ -9,7 +9,6 @@ function quad = quadSpecifyIndices(quad, inIndices, outIndices)
 
 % we make no other changes at the moment
 
-
 % mnemonic for the permutation: if quad.p(i) contains k, then quad.X(i, :)
 % contains the kth row of PPT(original matrix M). i.e., M(p,p) = quad.X
 

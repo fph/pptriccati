@@ -1,5 +1,5 @@
 function sym = symFromQuad(quad)
-% creates a 'symBasis', i.e., an explicit PPT, from a factored quadBasis
+% creates a 'symBasis', i.e., an object representing a PPT in non-factored form, from a factored quadBasis
 
 sym.p = quad.p;
 sym.dimensions = quad.dimensions;
