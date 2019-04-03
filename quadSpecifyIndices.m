@@ -1,4 +1,4 @@
-function quad = quadSpecifyIndices(quad, inIndices, outIndices)
+function [quad, det_accumulated] = quadSpecifyIndices(quad, inIndices, outIndices)
 % modifies a PPT so that a few specific indices are in or out
 %
 % quad = quadSpecifyIndices(quad, inIndices, outIndices)
@@ -6,6 +6,8 @@ function quad = quadSpecifyIndices(quad, inIndices, outIndices)
 % return an equivalent PPT such that inIndices are inside the PPT set and
 % outIndices are outside it.
 % inIndices, outIndices are indices in the original matrix
+%
+% Returns the determinant of the change-of-basis matrix as well
 
 % we make no other changes at the moment
 
@@ -45,23 +47,25 @@ quad.p = quad.p(p);
 toSwap = false(1, n1+n2);
 toSwap(n1-sum(toRemove)+1 : n1+sum(toInsert)) = true;
 
+det_accumulated = 1;
 while any(toSwap)
     n1 = quad.dimensions(1);
     n2 = quad.dimensions(2);
     I = optimalPivotQuad(quad, toSwap);
     if length(I) == 2
-        quad = updateQuadBasisInOut(quad, I(1), I(2)-n1);
+        [quad, det] = updateQuadBasisInOut(quad, I(1), I(2)-n1);
         toSwap([I(1) n1]) = toSwap([n1 I(1)]);
         toSwap(n1) = false;
         toSwap([I(2), n1+1]) = toSwap([n1+1, I(2)]);
         toSwap(n1+1) = false;        
     elseif I <= n1
-        quad = updateQuadBasisOut(quad, I);
+        [quad, det] = updateQuadBasisOut(quad, I);
         toSwap([I n1]) = toSwap([n1 I]);
         toSwap(n1) = false;
     else
-        quad = updateQuadBasisIn(quad, I-n1);      
+        [quad, det] = updateQuadBasisIn(quad, I-n1);      
         toSwap([I, n1+1]) = toSwap([n1+1, I]);
         toSwap(n1+1) = false;
     end
+    det_accumulated = det_accumulated * det;
 end

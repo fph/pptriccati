@@ -1,4 +1,4 @@
-function quad = updateQuadBasisIn(quad, j)
+function [quad, det] = updateQuadBasisIn(quad, j)
 % transforms a quadBasis into an equivalent one by adding one row to A and
 % B and removing a column from A and C
 %
@@ -33,3 +33,5 @@ quad.X(n1+1, end-n2+2:end) = -quad.X(n1+1, end-n2+1) * quad.X(n1+1, end-n2+2:end
 quad.X(n1+1, 1:end-n2) = 0; %zeros that are inserted in the "grown" B; we can't count on them to be zero already in quad.X
 
 quad.dimensions = [n1+1, n2-1];
+
+det = s^2;

@@ -1,12 +1,13 @@
-function quad = quadFromQuad(quad, newp, newdimensions)
+function [quad, det] = quadFromQuad(quad, newp, newdimensions)
 % computes a specific PPT in quad form (even when the matrix to invert is ill-conditioned)
+% returns also the determinant of the change-of-basis matrix, optionally
 
 % build arrays that tell which indices in the initial and final matrix are PPTed in
 
 newIn = false(size(newp));
 newIn(newp(1:newdimensions(1))) = true;
 
-quad = quadSpecifyIndices(quad, newIn, ~newIn);
+[quad, det] = quadSpecifyIndices(quad, newIn, ~newIn);
 
 % now the "In" and "Out" sets are as specified; we just have to reorder
 % their entries.

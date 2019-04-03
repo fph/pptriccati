@@ -1,4 +1,4 @@
-function quad = updateQuadBasisInOut(quad, i, j)
+function [quad, det] = updateQuadBasisInOut(quad, i, j)
 % transforms a quadBasis into an equivalent one by swapping one row of A&B
 % and one column of A&C
 %
@@ -81,3 +81,5 @@ else
 end
  
 quad.p([n1 n1+1]) = quad.p([n1+1 n1]);
+
+det = -delta^2;

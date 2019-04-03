@@ -18,9 +18,10 @@ for trie = 1:100
     assertAlmostEqual(-X, OX);
     
     if cond(X) < 1/sqrt(eps) %skips non-invertible tests        
-        quadI = quadInverse(quad);
+        [quadI, thedet] = quadInverse(quad);
         X = quasidefiniteMatrixFromQuad(quad);
         IX = quasidefiniteMatrixFromQuad(quadI);
         assertAlmostEqual(inv(X), IX);
+        assertAlmostEqual(thedet, det(X));
     end
 end
