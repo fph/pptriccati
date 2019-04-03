@@ -1,4 +1,4 @@
-function [quadI, det] = quadInverse(quad)
+function [quadI, logdet] = quadInverse(quad)
 % computes the inverse of quasidefiniteMatrixFromQuad(quad)
 % returns also its determinant
 
@@ -8,7 +8,7 @@ n2 = quad.dimensions(2);
 p = [quad.p(n1+1:end) quad.p(1:n1)];
 dimensions = [n2 n1];
 
-[quadI, det] = quadFromQuad(quad, p, dimensions);
+[quadI, logdet] = quadFromQuad(quad, p, dimensions);
 
 % swap sign of A in quadI: recall that we have swapped dimensions, so n2
 % ends up in the first index

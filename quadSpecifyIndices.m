@@ -1,4 +1,4 @@
-function [quad, det_accumulated] = quadSpecifyIndices(quad, inIndices, outIndices)
+function [quad, logdet] = quadSpecifyIndices(quad, inIndices, outIndices)
 % modifies a PPT so that a few specific indices are in or out
 %
 % quad = quadSpecifyIndices(quad, inIndices, outIndices)
@@ -47,7 +47,7 @@ quad.p = quad.p(p);
 toSwap = false(1, n1+n2);
 toSwap(n1-sum(toRemove)+1 : n1+sum(toInsert)) = true;
 
-det_accumulated = 1;
+logdet = 0;
 while any(toSwap)
     n1 = quad.dimensions(1);
     n2 = quad.dimensions(2);
@@ -67,5 +67,5 @@ while any(toSwap)
         toSwap([I, n1+1]) = toSwap([n1+1, I]);
         toSwap(n1+1) = false;
     end
-    det_accumulated = det_accumulated * det;
+    logdet = logdet + log(abs(det));
 end
