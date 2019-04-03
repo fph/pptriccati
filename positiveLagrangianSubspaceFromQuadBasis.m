@@ -13,8 +13,8 @@ U = zeros(2*(n1+n2), n1+n2);
 
 % to
 
-% [B A]
-% [0 C]
+% X = [B A]
+%     [0 C]
 
 U(1:n1, 1:n1) = quad.X(1:n1, 1:end-n2) * quad.X(1:n1, 1:end-n2)';
 U(1:n1, n1+1:end) = quad.X(1:n1, end-n2+1:end);
